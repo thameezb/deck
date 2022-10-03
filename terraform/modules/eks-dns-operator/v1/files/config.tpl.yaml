@@ -1,0 +1,14 @@
+# Documentation:
+# https://artifacthub.io/packages/helm/bitnami/external-dns
+provider: aws
+policy: upsert-only
+registry: txt
+txtOwnerId: ${aws_dns_public_zone_id}
+serviceAccount:
+  name: external-dns
+  annotations:
+    eks.amazonaws.com/role-arn: ${service_account_iam_role_arn}
+crd:
+  create: true
+aws:
+  zoneType: public

@@ -1,0 +1,28 @@
+spectator:
+  applicationName: ${spring.application.name}
+  webEndpoint:
+    enabled: false
+
+spinnaker:
+  extensibility:
+    plugins: {}
+    repositories: {}
+    plugins-root-path: /opt/rosco/plugins
+    strict-plugin-loading: false
+
+server:
+  port: ${services.rosco.port}
+  address: ${services.rosco.host}
+rosco:
+  configDir: /opt/rosco/config/packer
+
+# redis:
+#   enabled: false
+#   cache:
+#     enabled: false
+#   scheduler:
+#     enabled: false
+#   taskRepository:
+#     enabled: false
+redis:
+  connection: ${services.redis.baseUrl:redis://localhost:6379}

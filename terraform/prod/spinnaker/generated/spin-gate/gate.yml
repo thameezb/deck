@@ -1,0 +1,68 @@
+spectator:
+  applicationName: ${spring.application.name}
+  webEndpoint:
+    enabled: false
+
+spinnaker:
+  extensibility:
+    plugins: {}
+    repositories: {}
+    plugins-root-path: /opt/gate/plugins
+    strict-plugin-loading: false
+
+server:
+  ssl:
+    enabled: false
+  port: ${services.gate.port}
+  address: 0.0.0.0
+
+security:
+  basic:
+    enabled: true
+  user: {}
+  debug: false
+  oauth2:
+    enabled: false
+    client:
+      clientId: 
+      clientSecret: ${secrets.gate_oauth_secret}
+      accessTokenUri: 
+      userAuthorizationUri: 
+      scope: openid profile email
+      preEstablishedRedirectUri: https://spinnaker.double.tech/gate/login # public access to spin-gate
+      useCurrentUri: false
+    resource:
+      userInfoUri: 
+    userInfoMapping: {}
+
+cors:
+  allowedOriginsPattern: .*
+
+saml:
+  enabled: true
+  issuerId: spinnaker
+  metadataUrl: https://hub.aw.double.tech/hub/api/rest/saml2/metadata
+  keyStore: file:/opt/spinnaker/secrets/saml.jks
+  keyStorePassword: ${KEY_STORE_PASSWORD}
+  keyStoreAliasName: saml
+  redirectProtocol: https
+  redirectHostname: spinnaker.double.tech
+  redirectBasePath: /gate
+  userAttributeMapping:
+    firstName: displayName
+    roles: member-of
+    username: uid
+    email: mail
+google: {}
+
+# Gate will check everything if this is not set explicitly.
+healthCheckableServices:
+  - orca
+  - clouddriver
+  - echo
+  - front50
+
+integrations:
+  gremlin:
+    enabled: false
+    baseUrl: https://api.gremlin.com/v1

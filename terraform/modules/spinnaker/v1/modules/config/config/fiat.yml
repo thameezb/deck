@@ -1,0 +1,53 @@
+spectator:
+  applicationName: $${spring.application.name}
+  webEndpoint:
+    enabled: false
+
+spinnaker:
+  extensibility:
+    plugins: {}
+    repositories: {}
+    plugins-root-path: /opt/fiat/plugins
+    strict-plugin-loading: false
+
+fiat:
+  admin:
+    roles:
+      - sysadmin
+
+auth:
+  groupMembership:
+    service: EXTERNAL
+    google:
+      roleProviderType: GOOGLE
+    github:
+      roleProviderType: GITHUB
+    file:
+      roleProviderType: FILE
+      path: /opt/spinnaker/config/roles.yml
+    ldap:
+      roleProviderType: LDAP
+  enabled: true
+
+server:
+  port: $${services.fiat.port:7003}
+  address: $${services.fiat.host:localhost}
+
+# sql:
+#   enabled: true
+#   baseUrl: jdbc:mysql://$${services.mysql.host}/fiat
+#   connectionPools:
+#     default:
+#       jdbcUrl: $${sql.baseUrl}?useSSL=false&serverTimezone=UTC
+#       user: fiat
+#       password: $${secrets.mysql_password.fiat}
+#   migration:
+#     jdbcUrl: $${sql.baseUrl}?useSSL=false&serverTimezone=UTC
+#     user: fiat
+#     password: $${secrets.mysql_password.fiat}
+
+# permissionsRepository:
+#   redis:
+#     enabled: false
+#   sql:
+#     enabled: true

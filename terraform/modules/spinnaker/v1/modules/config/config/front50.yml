@@ -1,0 +1,63 @@
+spectator:
+  applicationName: $${spring.application.name}
+  webEndpoint:
+    enabled: false
+
+spinnaker:
+  extensibility:
+    plugins: {}
+    repositories: {}
+    plugins-root-path: /opt/front50/plugins
+    strict-plugin-loading: false
+  azs:
+    enabled: false
+  gcs:
+    rootFolder: front50
+    bucketLocation: ''
+    enabled: false
+  redis:
+    host: spin-redis.spinnaker
+    port: 6379
+    enabled: false
+  s3:
+    bucket: ${front50.s3_bucket}
+    rootFolder: front50
+    region: ${front50.s3_region}
+    pathStyleAccess: false
+    accessKeyId: $${AWS_ACCESS_KEY_ID}
+    secretAccessKey: $${AWS_SECRET_ACCESS_KEY}
+    enabled: true
+  oracle:
+    enabled: false
+
+
+# sql:
+#   enabled: true
+#   connectionPools:
+#     default:
+#       default: true
+#       jdbcUrl: jdbc:mysql://$${services.mysql.host}/front50
+#       user: front50
+#       password: $${secrets.mysql_password.front50}
+#   migration:
+#     user: front50
+#     password: $${secrets.mysql_password.front50}
+#     jdbcUrl: jdbc:mysql://$${services.mysql.host}/front50
+
+server:
+  port: $${services.front50.port}
+  address: $${services.front50.host}
+
+cassandra:
+  enabled: false
+
+hystrix:
+  command:
+    default.execution.isolation.thread.timeoutInMilliseconds: 15000
+  threadpool:
+    DefaultNotificationDAO:
+      coreSize: 25
+      maxQueueSize: 100
+    DefaultPipelineDAO:
+      coreSize: 25
+      maxQueueSize: 100

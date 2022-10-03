@@ -1,0 +1,12 @@
+# https://github.com/aws/eks-charts/tree/master/stable/aws-load-balancer-controller
+# https://docs.aws.amazon.com/eks/latest/userguide/add-ons-images.html
+serviceAccount:
+  create: true
+  name: aws-load-balancer-controller
+  annotations:
+    eks.amazonaws.com/role-arn: ${service_account_iam_role_arn}
+clusterName: ${cluster_name}
+vpcId: ${vpc_id}
+region: ${region}
+image:
+  repository: 602401143452.dkr.ecr.eu-central-1.amazonaws.com/amazon/aws-load-balancer-controller

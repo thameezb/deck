@@ -1,0 +1,133 @@
+spectator:
+  applicationName: $${spring.application.name}
+  webEndpoint:
+    enabled: false
+
+spinnaker:
+  extensibility:
+    plugins: {}
+    repositories: {}
+    plugins-root-path: /opt/clouddriver/plugins
+    strict-plugin-loading: false
+
+appengine:
+  enabled: false
+  accounts: []
+aws:
+  enabled: false
+  accounts: []
+  bakeryDefaults:
+    baseImages: []
+  defaultKeyPairTemplate: '{{name}}-keypair'
+  defaultRegions:
+  - name: us-west-2
+  defaults:
+    iamRole: BaseIAMRole
+ecs:
+  enabled: false
+  accounts: []
+azure:
+  enabled: false
+  accounts: []
+  bakeryDefaults:
+    templateFile: azure-linux.json
+    baseImages: []
+dcos:
+  enabled: false
+  accounts: []
+  clusters: []
+dockerRegistry:
+  enabled: false
+  accounts: []
+google:
+  enabled: false
+  accounts: []
+  bakeryDefaults:
+    templateFile: gce.json
+    baseImages: []
+    zone: us-central1-f
+    network: default
+    useInternalIp: false
+huaweicloud:
+  enabled: false
+  accounts: []
+  bakeryDefaults:
+    baseImages: []
+kubernetes:
+  enabled: true
+  accounts:
+  - name: spinnaker
+    requiredGroupMembership: []
+    permissions: {}
+    dockerRegistries: []
+    providerVersion: V2
+    configureImagePullSecrets: true
+    cacheThreads: 1
+    namespaces: []
+    omitNamespaces: []
+    kinds: []
+    omitKinds: []
+    customResources: []
+    cachingPolicies: []
+    kubeconfigFile: /spinnaker/k8s/kubeconfig.conf
+    rawResourcesEndpointConfig:
+      kindExpressions: []
+      omitKindExpressions: []
+    oAuthScopes: []
+    onlySpinnakerManaged: false
+  primaryAccount: spinnaker
+tencentcloud:
+  enabled: false
+  accounts: []
+  bakeryDefaults:
+    baseImages: []
+oracle:
+  enabled: false
+  accounts: []
+  bakeryDefaults:
+    templateFile: oci.json
+    baseImages: []
+cloudfoundry:
+  enabled: false
+  accounts: []
+
+artifacts:
+  bitbucket:
+    enabled: false
+    accounts: []
+  gcs:
+    enabled: false
+    accounts: []
+  oracle:
+    enabled: false
+    accounts: []
+  github:
+    enabled: false
+    accounts: []
+  gitlab:
+    enabled: false
+    accounts: []
+  gitrepo:
+    enabled: false
+    accounts: []
+  http:
+    enabled: false
+    accounts: []
+  helm:
+    enabled: false
+    accounts: []
+  s3:
+    enabled: false
+    accounts: []
+  maven:
+    enabled: false
+    accounts: []
+  templates: []
+
+admin:
+  tasks:
+    shutdown-wait-seconds: 86400 # 24 hours to comply with graceful shutdown timeout set in k8s.
+
+server:
+  port: $${services.clouddriver.port:7002}
+  address: $${services.clouddriver.host:localhost}

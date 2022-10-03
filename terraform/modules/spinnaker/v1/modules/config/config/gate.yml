@@ -1,0 +1,68 @@
+spectator:
+  applicationName: $${spring.application.name}
+  webEndpoint:
+    enabled: false
+
+spinnaker:
+  extensibility:
+    plugins: {}
+    repositories: {}
+    plugins-root-path: /opt/gate/plugins
+    strict-plugin-loading: false
+
+server:
+  ssl:
+    enabled: false
+  port: $${services.gate.port}
+  address: 0.0.0.0
+
+security:
+  basic:
+    enabled: true
+  user: {}
+  debug: false
+  oauth2:
+    enabled: ${oauth_enabled}
+    client:
+      clientId: ${oauth_client_id}
+      clientSecret: $${secrets.gate_oauth_secret}
+      accessTokenUri: ${access_token_uri}
+      userAuthorizationUri: ${user_authorization_uri}
+      scope: openid profile email
+      preEstablishedRedirectUri: https://${gate_host}${gate_path}/login # public access to spin-gate
+      useCurrentUri: false
+    resource:
+      userInfoUri: ${user_info_uri}
+    userInfoMapping: {}
+
+cors:
+  allowedOriginsPattern: .*
+
+saml:
+  enabled: ${saml_enabled}
+  issuerId: ${saml_issuer_id}
+  metadataUrl: ${saml_metadata_url}
+  keyStore: file:/opt/spinnaker/secrets/saml.jks
+  keyStorePassword: $${KEY_STORE_PASSWORD}
+  keyStoreAliasName: saml
+  redirectProtocol: https
+  redirectHostname: ${gate_host}
+  redirectBasePath: ${gate_path}
+  userAttributeMapping:
+    firstName: displayName
+    roles: member-of
+    username: uid
+    email: mail
+google: {}
+
+# Gate will check everything if this is not set explicitly.
+healthCheckableServices:
+  - orca
+  - clouddriver
+  - echo
+  - front50
+
+integrations:
+  gremlin:
+    enabled: false
+    baseUrl: https://api.gremlin.com/v1

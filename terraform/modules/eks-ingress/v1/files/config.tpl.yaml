@@ -1,0 +1,34 @@
+# Documentation:
+# https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx
+global:
+  logLevel: 4
+controller:
+  ingressClassResource:
+    enabled: true
+    name: nginx
+    default: false
+    controllerValue: k8s.io/ingress-nginx
+  service:
+    ipFamilies:
+      - IPv6
+    ipFamilyPolicy: PreferDualStack
+    targetPorts:
+      http: http
+      https: http
+    annotations:
+      service.beta.kubernetes.io/aws-load-balancer-additional-resource-tags: |
+        ${join(",", [for key, value in tags : "${key}=${value}"])}
+      service.beta.kubernetes.io/aws-load-balancer-ssl-cert: ${acm_arn}
+      service.beta.kubernetes.io/aws-load-balancer-ssl-ports: https
+      service.beta.kubernetes.io/aws-load-balancer-backend-protocol: https
+      service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
+      service.beta.kubernetes.io/aws-load-balancer-type: "external"
+      service.beta.kubernetes.io/aws-load-balancer-ip-address-type: dualstack
+      service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "ip"
+      alb.ingress.kubernetes.io/ip-address-type: dualstack
+  enableCustomResources: true
+serviceAccount:
+  create: true
+  name: aws-load-balancer-controller
+  annotations:
+    eks.amazonaws.com/role-arn: ${service_account_iam_role_arn}

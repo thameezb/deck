@@ -1,0 +1,112 @@
+spectator:
+  applicationName: $${spring.application.name}
+  webEndpoint:
+    enabled: false
+
+spinnaker:
+  baseUrl: $${services.deck.baseUrl}
+  inMemory:
+     enabled: true
+  extensibility:
+    plugins: {}
+    repositories: {}
+    plugins-root-path: /opt/echo/plugins
+    strict-plugin-loading: false
+
+global.spinnaker.timezone: Etc/UTC
+spinnaker.baseUrl: $${services.deck.baseUrl}
+twilio:
+  enabled: false
+  baseUrl: https://api.twilio.com/
+github-status:
+  enabled: false
+
+pubsub:
+  enabled: false
+  google:
+    enabled: false
+    pubsubType: GOOGLE
+    subscriptions: []
+    publishers: []
+
+artifacts:
+  bitbucket:
+    enabled: false
+    accounts: []
+  gcs:
+    enabled: false
+    accounts: []
+  oracle:
+    enabled: false
+    accounts: []
+  github:
+    enabled: false
+    accounts: []
+  gitlab:
+    enabled: false
+    accounts: []
+  gitrepo:
+    enabled: false
+    accounts: []
+  http:
+    enabled: false
+    accounts: []
+  helm:
+    enabled: false
+    accounts: []
+  s3:
+    enabled: false
+    accounts: []
+  maven:
+    enabled: false
+    accounts: []
+  templates: []
+
+gcb:
+  enabled: false
+  accounts: []
+
+# halconfig
+
+server:
+  port: $${services.echo.port}
+  address: $${services.echo.host}
+
+front50:
+  enabled: $${services.front50.enabled}
+  baseUrl: $${services.front50.baseUrl}
+
+igor:
+  enabled: $${services.igor.enabled}
+  baseUrl: $${services.igor.baseUrl}
+
+orca:
+  enabled: $${services.orca.enabled}
+  baseUrl: $${services.orca.baseUrl}
+
+scheduler:
+  enabled: $${services.echo.cron.enabled:true}
+  threadPoolSize: 20
+  triggeringEnabled: true
+  pipelineConfigsPoller:
+    enabled: true
+    pollingIntervalMs: 30000
+  cron:
+    timezone: $${global.spinnaker.timezone:America/Los_Angeles}
+
+%{ if echo.mail_enabled }
+mail:
+  enabled: ${echo.mail_enabled}
+  from: ${echo.mail_from}
+spring:
+  mail:
+    host: ${echo.mail_host}
+    port: ${echo.mail_port}
+%{ endif }
+
+%{ if echo.slack_enabled }
+slack:
+  enabled: ${echo.slack_enabled}
+  send-compact-messages: true
+  token: $${SLACK_TOKEN}
+%{ endif }
