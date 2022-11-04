@@ -3,8 +3,8 @@ module "cluster" {
 
   name = "spinnaker-prod"
 
-  public_nodes_desired_size = 2
-  public_nodes_max_size     = 2
+  public_nodes_desired_size = 4
+  public_nodes_max_size     = 4
   thumbprint_list           = ["9e99a48a9960b14926bb7f3b02e22da2b0ab7280"]
   eks_ip_family             = "ipv6"
 

@@ -63,7 +63,7 @@ services:
     host: 0.0.0.0
     port: 8088
     baseUrl: http://spin-igor.spinnaker:8088
-    enabled: false
+    enabled: true
   kayenta:
     host: 0.0.0.0
     port: 8090

@@ -141,7 +141,6 @@ variable "rosco_image" {
   default = "us-docker.pkg.dev/spinnaker-community/docker/rosco:1.8.3"
 }
 
-
 variable "redis_image" {
   type    = string
   default = "gcr.io/kubernetes-spinnaker/redis-cluster:v2"

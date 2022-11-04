@@ -5,6 +5,7 @@ locals {
     spin-clouddriver = concat(local.common_configs, ["clouddriver.yml"])
     spin-orca        = concat(local.common_configs, ["orca.yml"])
     spin-fiat        = concat(local.common_configs, ["fiat.yml"])
+    spin-igor        = concat(local.common_configs, ["igor.yml"])
     spin-echo        = concat(local.common_configs, ["echo.yml"])
     spin-front50     = concat(local.common_configs, ["front50.yml"])
     spin-rosco       = concat(local.common_configs, ["rosco.yml"])
@@ -57,6 +58,7 @@ locals {
   orca_image        = var.orca_image
   rosco_image       = var.rosco_image
   echo_image        = var.echo_image
+  igor_image        = var.igor_image
   front50_image     = var.front50_image
   fiat_image        = var.fiat_image
   redis_image       = var.redis_image

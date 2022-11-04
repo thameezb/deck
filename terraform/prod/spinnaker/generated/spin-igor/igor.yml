@@ -1,0 +1,74 @@
+spectator:
+  applicationName: ${spring.application.name}
+  webEndpoint:
+    enabled: false
+
+spinnaker:
+  extensibility:
+    plugins: {}
+    repositories: {}
+    plugins-root-path: /opt/igor/plugins
+    strict-plugin-loading: false
+
+artifacts:
+  bitbucket:
+    enabled: false
+    accounts: []
+  gcs:
+    enabled: false
+    accounts: []
+  oracle:
+    enabled: false
+    accounts: []
+  github:
+    enabled: false
+    accounts: []
+  gitlab:
+    enabled: false
+    accounts: []
+  gitrepo:
+    enabled: false
+    accounts: []
+  http:
+    enabled: false
+    accounts: []
+  helm:
+    enabled: false
+    accounts: []
+  s3:
+    enabled: false
+    accounts: []
+  maven:
+    enabled: false
+    accounts: []
+  templates: []
+
+artifactory:
+  enabled: false
+  searches: []
+nexus:
+  enabled: false
+  searches: []
+
+jenkins:
+  enabled: false
+  masters: []
+travis:
+  enabled: false
+  masters: []
+wercker:
+  enabled: false
+  masters: []
+concourse:
+  enabled: false
+  masters: []
+gcb:
+  enabled: false
+  accounts: []
+codebuild:
+  enabled: false
+  accounts: []
+
+server:
+  port: ${services.igor.port:8088}
+  address: ${services.igor.host:localhost}
