@@ -16,3 +16,23 @@ variable "bucket_name_prefix" {
   type    = string
   default = null
 }
+
+variable "block_public_acls" {
+  type    = bool
+  default = false
+}
+
+variable "block_public_policy" {
+  type    = bool
+  default = false
+}
+
+variable "ignore_public_acls" {
+  type    = bool
+  default = false
+}
+
+variable "restrict_public_buckets" {
+  type    = bool
+  default = false
+}
