@@ -18,8 +18,17 @@ locals {
         username = map_role.username
         groups   = try(map_role.groups, [])
       }
-    ]
+    ],
+    [
+      for user in module.sso_users : {
+        rolearn  = user.arn_wo_path
+        username = user.user_name
+        groups = [
+          "system:masters",
+        ]
+    }]
   )
+
   map_users = flatten(concat(
     [
       for map_user in var.map_users : {
@@ -36,16 +45,19 @@ locals {
         }
       ]
   ]))
+
   map_accounts = var.map_accounts
 }
 
 
 resource "kubernetes_config_map_v1_data" "aws_auth" {
   force = true
+
   metadata {
     name      = "aws-auth"
     namespace = "kube-system"
   }
+
   data = {
     mapRoles    = yamlencode(local.map_roles)
     mapUsers    = yamlencode(local.map_users)

@@ -1,3 +1,9 @@
+locals {
+  sso_users = {
+    aws-sso-admins : "AWSReservedSSO_AdministratorAccess_0e24f3ac0c6d48da"
+  }
+}
+
 module "cluster" {
   source = "../../modules/eks/v1"
 
@@ -18,6 +24,7 @@ module "eks_auth" {
 
   eks_cluster_name = module.cluster.eks_cluster_name
   node_roles       = [module.cluster.eks_node_group_role_arn]
+  sso_users        = local.sso_users
   map_users = [{
     groups   = ["system:masters"]
     iam_user = "arn:aws:iam::022615369514:user/salvatoremazz"

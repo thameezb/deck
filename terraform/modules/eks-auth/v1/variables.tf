@@ -8,6 +8,7 @@ variable "node_roles" {
   type        = list(string)
   default     = []
 }
+
 variable "map_roles" {
   description = "(Optional) Additional mapping for IAM roles and Kubernetes RBAC."
   type = list(object({
@@ -27,6 +28,7 @@ variable "map_users" {
   }))
   default = []
 }
+
 variable "map_groups" {
   description = "(Optional) Additional mapping for IAM users and Kubernetes RBAC."
   type = list(object({
@@ -40,4 +42,9 @@ variable "map_accounts" {
   description = "(Optional) AWS account numbers to automatically map IAM ARNs from."
   type        = list(string)
   default     = []
+}
+
+variable "sso_users" {
+  type = map(string)
+  default = {}
 }
