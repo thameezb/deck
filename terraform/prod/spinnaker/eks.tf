@@ -9,9 +9,9 @@ module "cluster" {
 
   name = "spinnaker-prod"
 
-  public_nodes_desired_size = 4
-  public_nodes_max_size     = 4
-  public_nodes_ami_id       = "ami-0a32d38119650a178"
+  public_nodes_desired_size    = 4
+  public_nodes_max_size        = 4
+  public_nodes_release_version = "1.22.17-20230304"
   public_nodes_instance_tags = {
     "Team"  = "SRE"
     "Infra" = "prod"

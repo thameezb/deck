@@ -1,7 +1,9 @@
 resource "aws_eks_node_group" "public" {
-  cluster_name  = aws_eks_cluster.this.name
-  node_role_arn = aws_iam_role.k8s_node_group.arn
-  subnet_ids    = var.public_subnet_ids
+  cluster_name    = aws_eks_cluster.this.name
+  node_role_arn   = aws_iam_role.k8s_node_group.arn
+  subnet_ids      = var.public_subnet_ids
+  release_version = var.public_nodes_release_version
+
   scaling_config {
     desired_size = var.public_nodes_desired_size
     max_size     = var.public_nodes_max_size
@@ -20,7 +22,6 @@ resource "aws_eks_node_group" "public" {
 # https://github.com/aws/containers-roadmap/issues/1723
 resource "aws_launch_template" "this" {
   name                   = "eks-node-group"
-  image_id               = var.public_nodes_ami_id
   vpc_security_group_ids = [aws_security_group.node.id]
 
   tag_specifications {

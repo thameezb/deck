@@ -47,7 +47,7 @@ variable "public_nodes_min_size" {
   default = 1
 }
 
-variable "public_nodes_ami_id" {
+variable "public_nodes_release_version" {
   type    = string
   default = null
 }
