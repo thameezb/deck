@@ -11,8 +11,15 @@ module "cluster" {
 
   public_nodes_desired_size = 4
   public_nodes_max_size     = 4
-  thumbprint_list           = ["9e99a48a9960b14926bb7f3b02e22da2b0ab7280"]
-  eks_ip_family             = "ipv6"
+  public_nodes_ami_id       = "ami-0a32d38119650a178"
+  public_nodes_instance_tags = {
+    "Team"  = "SRE"
+    "Infra" = "prod"
+    "Plane" = "SRE"
+  }
+
+  thumbprint_list = ["9e99a48a9960b14926bb7f3b02e22da2b0ab7280"]
+  eks_ip_family   = "ipv6"
 
   vpc_id             = data.aws_vpc.this.id
   private_subnet_ids = [for k, v in data.aws_subnet.private : v.id]

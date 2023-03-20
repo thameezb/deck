@@ -19,12 +19,19 @@ resource "aws_eks_node_group" "public" {
 
 # https://github.com/aws/containers-roadmap/issues/1723
 resource "aws_launch_template" "this" {
-  name = "eks-node-group"
-
+  name                   = "eks-node-group"
+  image_id               = var.public_nodes_ami_id
   vpc_security_group_ids = [aws_security_group.node.id]
+
+  tag_specifications {
+    resource_type = "instance"
+    tags          = var.public_nodes_instance_tags
+  }
+
   private_dns_name_options {
     hostname_type = "ip-name"
   }
+
   metadata_options {
     http_endpoint               = "enabled"
     http_protocol_ipv6          = "enabled"
