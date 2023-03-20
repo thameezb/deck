@@ -2,7 +2,7 @@ spectator:
   applicationName: $${spring.application.name}
   webEndpoint:
     enabled: false
-a
+
 appengine:
   enabled: false
   accounts: []
