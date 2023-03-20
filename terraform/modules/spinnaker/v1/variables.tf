@@ -92,53 +92,52 @@ variable "s3_region" {
 
 variable "echo_image" {
   type    = string
-  default = "us-docker.pkg.dev/spinnaker-community/docker/echo:2.34.2"
+  default = "us-docker.pkg.dev/spinnaker-community/docker/echo:2.34.5"
 }
 
 variable "clouddriver_image" {
-  type = string
-  # default = "us-docker.pkg.dev/spinnaker-community/docker/clouddriver:5.76.2"
-  default = "us-docker.pkg.dev/spinnaker-community/docker/clouddriver:5.74.4"
+  type    = string
+  default = "us-docker.pkg.dev/spinnaker-community/docker/clouddriver:5.76.4"
 }
 
 variable "deck_image" {
   type    = string
-  default = "us-docker.pkg.dev/spinnaker-community/docker/deck:3.9.1"
+  default = "us-docker.pkg.dev/spinnaker-community/docker/deck:3.9.3"
 }
 
 variable "fiat_image" {
   type    = string
-  default = "us-docker.pkg.dev/spinnaker-community/docker/fiat:1.31.2"
+  default = "us-docker.pkg.dev/spinnaker-community/docker/fiat:1.31.4"
 }
 
 variable "front50_image" {
   type    = string
-  default = "us-docker.pkg.dev/spinnaker-community/docker/front50:2.25.2"
+  default = "us-docker.pkg.dev/spinnaker-community/docker/front50:2.25.4"
 }
 
 variable "gate_image" {
   type    = string
-  default = "us-docker.pkg.dev/spinnaker-community/docker/gate:6.55.2"
+  default = "us-docker.pkg.dev/spinnaker-community/docker/gate:6.55.4"
 }
 
 variable "igor_image" {
   type    = string
-  default = "us-docker.pkg.dev/spinnaker-community/docker/igor:4.7.2"
+  default = "us-docker.pkg.dev/spinnaker-community/docker/igor:4.7.4"
 }
 
 variable "kayenta_image" {
   type    = string
-  default = "us-docker.pkg.dev/spinnaker-community/docker/kayenta:2.32.2"
+  default = "us-docker.pkg.dev/spinnaker-community/docker/kayenta:2.32.4"
 }
 
 variable "orca_image" {
   type    = string
-  default = "us-docker.pkg.dev/spinnaker-community/docker/orca:8.24.2"
+  default = "us-docker.pkg.dev/spinnaker-community/docker/orca:8.24.5"
 }
 
 variable "rosco_image" {
   type    = string
-  default = "us-docker.pkg.dev/spinnaker-community/docker/rosco:1.8.3"
+  default = "us-docker.pkg.dev/spinnaker-community/docker/rosco:1.8.6"
 }
 
 variable "redis_image" {

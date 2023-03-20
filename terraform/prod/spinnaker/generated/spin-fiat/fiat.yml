@@ -3,13 +3,6 @@ spectator:
   webEndpoint:
     enabled: false
 
-spinnaker:
-  extensibility:
-    plugins: {}
-    repositories: {}
-    plugins-root-path: /opt/fiat/plugins
-    strict-plugin-loading: false
-
 fiat:
   admin:
     roles:

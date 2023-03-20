@@ -3,13 +3,6 @@ spectator:
   webEndpoint:
     enabled: false
 
-spinnaker:
-  extensibility:
-    plugins: {}
-    repositories: {}
-    plugins-root-path: /opt/orca/plugins
-    strict-plugin-loading: false
-
 # sql:
 #   enabled: true
 #   connectionPool:
@@ -79,14 +72,9 @@ pipelineTemplates.enabled: true
 pipelineTemplate.enabled: true
 plugins: {}
 
-# TODO: configure it
-# teamcity:
-#   deckUrl: https://spinnaker.double.tech
-#   profiles:
-#     - name: aw
-#       serverURL: https://teamcity.aw.cloud.yandex.net
-#       tokenFile: /secrets/common/teamcity_aw_token
-#     - name: yandex
-#       serverURL: https://teamcity.yandex-team.ru
-#       username: robot-spinnaker
-#       passwordFile: /secrets/common/robot_spinnaker_password
+teamcity:
+  deckUrl: https://spinnaker.double.tech
+  profiles:
+    - name: aw
+      serverURL: https://teamcity.aw.cloud.yandex.net
+      tokenFile: /secrets/teamcity/aw_token

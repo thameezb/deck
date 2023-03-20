@@ -125,8 +125,11 @@ resource "kubernetes_deployment" "clouddriver" {
             mount_path = "/spinnaker/k8s/"
             read_only  = false
           }
+          volume_mount {
+            name       = "empty-dir"
+            mount_path = "/opt/spinnaker/plugins"
+          }
         }
-
 
 
         volume {
@@ -141,6 +144,10 @@ resource "kubernetes_deployment" "clouddriver" {
           config_map {
             name = kubernetes_config_map.kubeconfig.metadata[0].name
           }
+        }
+        volume {
+          name = "empty-dir"
+          empty_dir {}
         }
       }
     }

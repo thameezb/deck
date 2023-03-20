@@ -28,6 +28,7 @@ resource "kubernetes_deployment" "front50" {
       }
     }
     template {
+      # TODO: assign IAM role to access to S3
       metadata {
         labels = merge({
           "app"                          = "spin"
@@ -118,13 +119,23 @@ resource "kubernetes_deployment" "front50" {
             name       = "spin-config"
             read_only  = false
           }
+          volume_mount {
+            name       = "empty-dir"
+            mount_path = "/opt/spinnaker/plugins"
+          }
         }
+
+
         volume {
           name = "spin-config"
           config_map {
             default_mode = "0644"
             name         = module.config["spin-front50"].name
           }
+        }
+        volume {
+          name = "empty-dir"
+          empty_dir {}
         }
       }
     }

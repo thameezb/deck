@@ -123,8 +123,15 @@ resource "kubernetes_deployment" "orca" {
             mount_path = "/opt/spinnaker/scripts"
             read_only  = false
           }
+          volume_mount {
+            name       = "empty-dir"
+            mount_path = "/opt/spinnaker/plugins"
+          }
+          volume_mount {
+            name       = "teamcity-tokens"
+            mount_path = "/secrets/teamcity/"
+          }
         }
-
 
 
         volume {
@@ -138,6 +145,16 @@ resource "kubernetes_deployment" "orca" {
           name = "scripts"
           config_map {
             name = kubernetes_config_map.orca.metadata[0].name
+          }
+        }
+        volume {
+          name = "empty-dir"
+          empty_dir {}
+        }
+        volume {
+          name = "teamcity-tokens"
+          secret {
+            secret_name = "teamcity"
           }
         }
       }

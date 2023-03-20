@@ -3,13 +3,6 @@ spectator:
   webEndpoint:
     enabled: false
 
-spinnaker:
-  extensibility:
-    plugins: {}
-    repositories: {}
-    plugins-root-path: /opt/gate/plugins
-    strict-plugin-loading: false
-
 server:
   ssl:
     enabled: false

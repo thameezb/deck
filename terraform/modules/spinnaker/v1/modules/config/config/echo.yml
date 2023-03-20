@@ -7,11 +7,6 @@ spinnaker:
   baseUrl: $${services.deck.baseUrl}
   inMemory:
      enabled: true
-  extensibility:
-    plugins: {}
-    repositories: {}
-    plugins-root-path: /opt/echo/plugins
-    strict-plugin-loading: false
 
 global.spinnaker.timezone: Etc/UTC
 spinnaker.baseUrl: $${services.deck.baseUrl}

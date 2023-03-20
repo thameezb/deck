@@ -3,13 +3,6 @@ spectator:
   webEndpoint:
     enabled: false
 
-spinnaker:
-  extensibility:
-    plugins: {}
-    repositories: {}
-    plugins-root-path: /opt/clouddriver/plugins
-    strict-plugin-loading: false
-
 appengine:
   enabled: false
   accounts: []

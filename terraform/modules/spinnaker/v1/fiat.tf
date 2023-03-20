@@ -99,13 +99,23 @@ resource "kubernetes_deployment" "fiat" {
             name       = "spin-config"
             read_only  = false
           }
+          volume_mount {
+            name       = "empty-dir"
+            mount_path = "/opt/spinnaker/plugins"
+          }
         }
+
+
         volume {
           name = "spin-config"
           config_map {
             default_mode = "0644"
             name         = module.config["spin-fiat"].name
           }
+        }
+        volume {
+          name = "empty-dir"
+          empty_dir {}
         }
       }
     }

@@ -6,7 +6,10 @@ spectator:
 spinnaker:
   extensibility:
     plugins: {}
-    repositories: {}
+    repositories:
+      front50:
+        enabled: false # it cannot be used by self
+        url: http://spin-front50.spinnaker:8080
     plugins-root-path: /opt/front50/plugins
     strict-plugin-loading: false
   azs:
@@ -24,12 +27,22 @@ spinnaker:
     rootFolder: front50
     region: ${front50.s3_region}
     pathStyleAccess: false
-    accessKeyId: $${AWS_ACCESS_KEY_ID}
+    accessKeyId: $${AWS_ACCESS_KEY_ID} # todo : Use IRSA
     secretAccessKey: $${AWS_SECRET_ACCESS_KEY}
     enabled: true
+    pluginStorage:
+      enabled: true
+      region: ${front50.s3_region}
+      bucket: ${front50.s3_bucket}
+      rootFolder: plugins/
   oracle:
     enabled: false
 
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
 
 # sql:
 #   enabled: true
