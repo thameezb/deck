@@ -45,6 +45,6 @@ variable "map_accounts" {
 }
 
 variable "sso_users" {
-  type = map(string)
+  type    = map(string)
   default = {}
 }

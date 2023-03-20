@@ -118,9 +118,11 @@ resource "kubernetes_deployment" "rosco" {
             mount_path = "/opt/rosco/config/packer/scripts"
             read_only  = false
           }
+          volume_mount {
+            name       = "empty-dir"
+            mount_path = "/opt/spinnaker/plugins"
+          }
         }
-
-
 
         volume {
           name = "spin-config"
@@ -140,6 +142,10 @@ resource "kubernetes_deployment" "rosco" {
           config_map {
             name = kubernetes_config_map.rosco-packer.metadata[0].name
           }
+        }
+        volume {
+          name = "empty-dir"
+          empty_dir {}
         }
       }
     }

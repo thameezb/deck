@@ -101,3 +101,22 @@ logging:
 #       netflix:
 #         spinnaker: $ {spinnaker.logging.level}
 #       retrofit: $ {spinnaker.logging.retrofit}
+
+spinnaker:
+  extensibility:
+    repositories:
+      front50:
+        enabled: true
+        url: http://spin-front50.spinnaker:8080
+    plugins-root-path: /opt/spinnaker/plugins
+    strict-plugin-loading: false
+    deck-proxy:
+      enabled: true
+      plugins:
+        Yandex.TeamcityPlugin:
+          enabled: true
+          version: 1.7.0
+    plugins:
+      Yandex.TeamcityPlugin:
+        enabled: true
+        version: 1.7.0

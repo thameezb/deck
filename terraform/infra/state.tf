@@ -8,7 +8,7 @@ terraform {
     session_name = "terraform-state"
 
     # use AWS_PROFILE=<your profile> instead of
-    # profile  = "dc-prod"
+    profile = "yadc-spinnaker"
 
 
     # skip_requesting_account_id  = true

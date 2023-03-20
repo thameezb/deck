@@ -3,13 +3,6 @@ spectator:
   webEndpoint:
     enabled: false
 
-spinnaker:
-  extensibility:
-    plugins: {}
-    repositories: {}
-    plugins-root-path: /opt/rosco/plugins
-    strict-plugin-loading: false
-
 server:
   port: $${services.rosco.port}
   address: $${services.rosco.host}
