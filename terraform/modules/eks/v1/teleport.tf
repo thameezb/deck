@@ -1,5 +1,5 @@
 module "teleport" {
-  source = "git::ssh://git@github.com/yadc-io/mdb-controlplane.git//terraform/modules/infra/k8s/v2/teleport?ref=c11e05f7cb267e9ed0de70da4fbb8da33ba8dd78"
+  source = "git::ssh://git@github.com/yadc-io/mdb-controlplane.git//terraform/modules/infra/k8s/v2/teleport?ref=43bde30b23e80ce3d9f1d102b9fd091946ef6ebb"
 
   count = var.teleport.enabled ? 1 : 0
 
