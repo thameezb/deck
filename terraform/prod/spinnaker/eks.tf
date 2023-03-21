@@ -2,12 +2,23 @@ locals {
   sso_users = {
     aws-sso-admins : "AWSReservedSSO_AdministratorAccess_0e24f3ac0c6d48da"
   }
+
+  k8s_cluster_name = "spinnaker-prod"
+
+  teleport = {
+    installation_labels = {
+      account = "spinnaker"
+      env     = "prod"
+      plane   = "SRE"
+    }
+    cluster_name = "sre-${local.k8s_cluster_name}"
+  }
 }
 
 module "cluster" {
   source = "../../modules/eks/v1"
 
-  name = "spinnaker-prod"
+  name = local.k8s_cluster_name
 
   public_nodes_desired_size    = 4
   public_nodes_max_size        = 4
@@ -24,6 +35,35 @@ module "cluster" {
   vpc_id             = data.aws_vpc.this.id
   private_subnet_ids = [for k, v in data.aws_subnet.private : v.id]
   public_subnet_ids  = [for k, v in data.aws_subnet.public : v.id]
+  teleport = {
+    cluster_name  = local.teleport.cluster_name
+    enabled       = true
+    version       = "11.3.7"
+    chart_version = "12.0.0-alpha.1"
+    account_id    = data.aws_caller_identity.current.account_id
+    region_name   = var.region
+    installation  = local.teleport.installation_labels
+
+    # TBD
+    apps = []
+
+    dbs = [{
+      type    = "rds"
+      regions = ["eu-central-1"]
+      tags = {
+        "*" = "*"
+      }
+    }]
+
+    ec2 = {
+      enabled   = true
+      installer = "sre-${local.teleport.installation_labels.env}"
+      regions   = ["eu-central-1"]
+      tags = {
+        "*" = "*"
+      }
+    }
+  }
 }
 
 module "eks_auth" {

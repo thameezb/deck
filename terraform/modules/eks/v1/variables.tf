@@ -61,3 +61,39 @@ variable "thumbprint_list" {
   type    = list(string)
   default = []
 }
+
+variable "teleport" {
+  type = object({
+    enabled       = optional(bool)
+    version       = optional(string)
+    chart_version = optional(string)
+    cluster_name  = optional(string)
+    account_id    = optional(string)
+    region_name   = optional(string)
+    installation = optional(object({
+      account = string
+      env     = string
+      plane   = string
+    }))
+    dbs = optional(list(object({
+      type    = string
+      regions = list(string)
+      tags    = map(string)
+    })))
+    apps = optional(list(object({
+      name = string
+      uri  = string
+    })))
+    ec2 = optional(object({
+      enabled   = bool
+      regions   = optional(list(string))
+      installer = optional(string)
+      tags      = optional(any)
+    }))
+  })
+
+  default = {
+    enabled = false
+  }
+}
+
