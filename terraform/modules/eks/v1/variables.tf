@@ -64,12 +64,13 @@ variable "thumbprint_list" {
 
 variable "teleport" {
   type = object({
-    enabled       = optional(bool)
-    version       = optional(string)
-    chart_version = optional(string)
-    cluster_name  = optional(string)
-    account_id    = optional(string)
-    region_name   = optional(string)
+    enabled               = optional(bool)
+    version               = optional(string)
+    chart_version         = optional(string)
+    cluster_name          = optional(string)
+    cluster_name_override = optional(string)
+    account_id            = optional(string)
+    region_name           = optional(string)
     installation = optional(object({
       account = string
       env     = string

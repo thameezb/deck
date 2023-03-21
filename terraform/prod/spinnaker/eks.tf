@@ -36,13 +36,14 @@ module "cluster" {
   private_subnet_ids = [for k, v in data.aws_subnet.private : v.id]
   public_subnet_ids  = [for k, v in data.aws_subnet.public : v.id]
   teleport = {
-    cluster_name  = local.teleport.cluster_name
-    enabled       = true
-    version       = "11.3.7"
-    chart_version = "12.0.0-alpha.1"
-    account_id    = data.aws_caller_identity.current.account_id
-    region_name   = var.region
-    installation  = local.teleport.installation_labels
+    cluster_name          = local.k8s_cluster_name
+    cluster_name_override = local.teleport.cluster_name
+    enabled               = true
+    version               = "11.3.7"
+    chart_version         = "12.0.0-alpha.1"
+    account_id            = data.aws_caller_identity.current.account_id
+    region_name           = var.region
+    installation          = local.teleport.installation_labels
 
     # TBD
     apps = []
