@@ -1,6 +1,13 @@
 provider "aws" {
   region  = var.region
   profile = "yadc-spinnaker"
+  default_tags {
+    tags = {
+      Plane = "SRE"
+      Team  = "SRE"
+      Infra = "prod"
+    }
+  }
 }
 
 data "aws_eks_cluster_auth" "this" {
