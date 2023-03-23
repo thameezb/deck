@@ -62,6 +62,11 @@ variable "thumbprint_list" {
   default = []
 }
 
+variable "instance_types" {
+  type    = list(string)
+  default = ["m6a.xlarge"]
+}
+
 variable "teleport" {
   type = object({
     enabled               = optional(bool)
@@ -97,4 +102,3 @@ variable "teleport" {
     enabled = false
   }
 }
-
