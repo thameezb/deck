@@ -75,3 +75,24 @@ module "teamcity_tokens" {
     },
   ]
 }
+
+module "bitbucket_tokens" {
+  source = "../../modules/eso-secret/v1"
+
+  name      = "bitbucket"
+  namespace = local.namespace
+
+  secret_store_name = local.secret_store_name
+
+  # create token on
+  # aws --profile yadc-spinnaker secretsmanager create-secret --name bitbucket-tokens --secret-string '{"robot-spinnaker-bitbucket_token": ""}'
+  data = [
+    {
+      secretKey = "robot-spinnaker-bitbucket_token"
+      remoteRef = {
+        key      = "bitbucket-tokens"
+        property = "robot-spinnaker-bitbucket_token"
+      }
+    },
+  ]
+}
