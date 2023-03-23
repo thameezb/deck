@@ -86,8 +86,11 @@ cloudfoundry:
 
 artifacts:
   bitbucket:
-    enabled: false
-    accounts: []
+    enabled: true
+    accounts:
+    - name: bb-robot-spinnaker-bitbucket
+      username: robot-spinnaker-bitbucket
+      passwordFile: /secrets/bitbucket/robot-spinnaker-bitbucket_token
   gcs:
     enabled: false
     accounts: []
@@ -101,8 +104,11 @@ artifacts:
     enabled: false
     accounts: []
   gitrepo:
-    enabled: false
-    accounts: []
+    enabled: true
+    accounts:
+    - name: gitrepo-robot-spinnaker-bitbucket
+      username: robot-spinnaker-bitbucket
+      passwordFile: /secrets/bitbucket/robot-spinnaker-bitbucket_token
   http:
     enabled: false
     accounts: []

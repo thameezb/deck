@@ -103,6 +103,10 @@ resource "kubernetes_deployment" "echo" {
             name       = "empty-dir"
             mount_path = "/opt/spinnaker/plugins"
           }
+          volume_mount {
+            name       = "bitbucket-tokens"
+            mount_path = "/secrets/bitbucket/"
+          }
         }
 
 
@@ -116,6 +120,12 @@ resource "kubernetes_deployment" "echo" {
         volume {
           name = "empty-dir"
           empty_dir {}
+        }
+        volume {
+          name = "bitbucket-tokens"
+          secret {
+            secret_name = "bitbucket"
+          }
         }
       }
     }
