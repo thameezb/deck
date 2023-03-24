@@ -76,5 +76,5 @@ teamcity:
   deckUrl: https://${deck_host}
   profiles:
     - name: aw
-      serverURL: https://teamcity.aw.cloud.yandex.net
+      serverURL: https://teamcity.aw.double.tech
       tokenFile: /secrets/teamcity/aw_token

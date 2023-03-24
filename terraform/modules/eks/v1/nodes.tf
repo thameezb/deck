@@ -3,6 +3,7 @@ resource "aws_eks_node_group" "public" {
   node_role_arn   = aws_iam_role.k8s_node_group.arn
   subnet_ids      = var.public_subnet_ids
   release_version = var.public_nodes_release_version
+  instance_types  = var.instance_types
 
   scaling_config {
     desired_size = var.public_nodes_desired_size
@@ -16,6 +17,10 @@ resource "aws_eks_node_group" "public" {
   }
   labels = {
     "vpc-type" = "public"
+  }
+
+  lifecycle {
+    create_before_destroy = true
   }
 }
 
