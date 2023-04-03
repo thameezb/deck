@@ -12,6 +12,6 @@ resource "helm_release" "external-dns" {
   wait              = true
   values = [templatefile("${path.module}/files/config.tpl.yaml", {
     aws_dns_public_zone_id       = var.aws_dns_public_zone_id
-    service_account_iam_role_arn = aws_iam_role.this.arn
+    service_account_iam_role_arn = var.create_iam ? aws_iam_role.this[0].arn : data.aws_iam_role.this[0].arn
   })]
 }

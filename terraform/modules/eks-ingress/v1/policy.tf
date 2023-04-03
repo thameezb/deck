@@ -1,4 +1,6 @@
 resource "aws_iam_policy" "this" {
+  count = var.create_iam ? 1 : 0
+
   policy = data.aws_iam_policy_document.ingress.json
 }
 

@@ -45,6 +45,14 @@ data "aws_iam_policy_document" "ipv6" {
 }
 
 resource "aws_iam_policy" "ipv6" {
+  count = var.create_iam ? 1 : 0
+
   name   = "eks_ipv6"
   policy = data.aws_iam_policy_document.ipv6.json
+}
+
+data "aws_iam_policy" "ipv6" {
+  count = var.create_iam ? 0 : 1
+
+  name = "eks_ipv6"
 }

@@ -9,7 +9,8 @@ resource "aws_eks_cluster" "this" {
   }
 
   vpc_config {
-    subnet_ids              = concat(var.private_subnet_ids, var.public_subnet_ids)
+    # retaining due to backward compatibility, this should refer to just var.node_subnet_ids
+    subnet_ids              = concat(var.private_subnet_ids, var.node_subnet_ids)
     endpoint_private_access = true
     endpoint_public_access  = true
     security_group_ids      = [aws_security_group.cluster.id]

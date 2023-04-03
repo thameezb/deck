@@ -13,3 +13,8 @@ variable "region" {
 variable "account_id" {
   type = string
 }
+
+variable "create_iam" {
+  type    = bool
+  default = true
+}

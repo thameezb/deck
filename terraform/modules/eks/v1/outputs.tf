@@ -10,7 +10,7 @@ output "eks_cluster_id" {
 }
 output "eks_node_group_ids" {
   value = [
-    aws_eks_node_group.public.id,
+    aws_eks_node_group.this.id,
   ]
 }
 output "eks_ca_data" {

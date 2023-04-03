@@ -24,3 +24,8 @@ variable "region" {
 variable "vpc_id" {
   type = string
 }
+
+variable "create_iam" {
+  type    = bool
+  default = true
+}

@@ -11,6 +11,6 @@ resource "helm_release" "this" {
   reset_values      = true
   wait              = true
   values = [templatefile("${path.module}/files/config.tpl.yaml", {
-    service_account_iam_role_arn = aws_iam_role.this.arn
+    service_account_iam_role_arn = var.create_iam ? aws_iam_role.this[0].arn : data.aws_iam_role.this[0].arn
   })]
 }

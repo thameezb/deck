@@ -8,3 +8,8 @@ variable "eks_oidc_url" {
 variable "eks_oidc_arn" {
   type = string
 }
+
+variable "create_iam" {
+  type    = bool
+  default = true
+}

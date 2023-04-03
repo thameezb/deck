@@ -15,7 +15,7 @@ resource "aws_iam_role" "k8s_node_group" {
     "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy",
     "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
     "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
-    aws_iam_policy.ipv6.arn,
+    var.create_iam ? aws_iam_policy.ipv6[0].arn : data.aws_iam_policy.ipv6[0].arn,
     "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
   ]
 }

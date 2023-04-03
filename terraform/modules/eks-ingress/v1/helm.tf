@@ -39,7 +39,7 @@ resource "helm_release" "elb" {
   wait              = true
   values = [
     templatefile("${path.module}/files/elb.config.tpl.yaml", {
-      service_account_iam_role_arn = aws_iam_role.this.arn
+      service_account_iam_role_arn = var.create_iam ? aws_iam_role.this[0].arn : data.aws_iam_role.this[0].arn
       cluster_name                 = var.cluster_name
       region                       = var.region
       vpc_id                       = var.vpc_id

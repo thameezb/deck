@@ -6,12 +6,20 @@ variable "vpc_id" {
   type = string
 }
 
-variable "private_subnet_ids" {
-  type = list(string)
+variable "node_vpc_type" {
+  type    = string
+  default = "public"
 }
 
-variable "public_subnet_ids" {
-  type = list(string)
+# retaining due to backward compatibility, this should be removed 
+variable "private_subnet_ids" {
+  type    = list(string)
+  default = []
+}
+
+variable "node_subnet_ids" {
+  type    = list(string)
+  default = []
 }
 
 variable "eks_ip_family" {
@@ -19,42 +27,27 @@ variable "eks_ip_family" {
   default = "ipv4"
 }
 
-variable "private_nodes_desired_size" {
+variable "node_desired_size" {
   type    = number
   default = 1
 }
-variable "private_nodes_max_size" {
+variable "node_max_size" {
   type    = number
   default = 1
 }
-variable "private_nodes_min_size" {
-  type    = number
-  default = 1
-}
-
-variable "public_nodes_desired_size" {
+variable "node_min_size" {
   type    = number
   default = 1
 }
 
-variable "public_nodes_max_size" {
-  type    = number
-  default = 1
-}
-
-variable "public_nodes_min_size" {
-  type    = number
-  default = 1
-}
-
-variable "public_nodes_release_version" {
-  type    = string
-  default = null
-}
-
-variable "public_nodes_instance_tags" {
+variable "node_instance_tags" {
   type    = map(string)
   default = {}
+}
+
+variable "node_release_version" {
+  type    = string
+  default = ""
 }
 
 variable "thumbprint_list" {
@@ -101,4 +94,14 @@ variable "teleport" {
   default = {
     enabled = false
   }
+}
+
+variable "create_iam" {
+  type    = bool
+  default = true
+}
+
+variable "create_launch_template" {
+  type    = bool
+  default = true
 }
