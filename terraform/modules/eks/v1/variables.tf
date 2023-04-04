@@ -2,6 +2,11 @@ variable "name" {
   type = string
 }
 
+variable "kubernetes_version" {
+  type    = string
+  default = "1.22"
+}
+
 variable "vpc_id" {
   type = string
 }

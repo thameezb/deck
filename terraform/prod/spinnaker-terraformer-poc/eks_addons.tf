@@ -1,9 +1,3 @@
-module "certificate" {
-  source      = "../../modules/certificate/v1"
-  domain_name = aws_route53_zone.public.name
-  zone_id     = aws_route53_zone.public.id
-}
-
 module "eks_dns" {
   source                 = "../../modules/eks-dns-operator/v1"
   aws_dns_public_zone_id = aws_route53_zone.public.id
@@ -31,4 +25,12 @@ module "eks_ingress" {
   region       = var.region
   vpc_id       = data.aws_vpc.this.id
   create_iam   = false
+}
+
+module "eks_auth" {
+  source = "../../modules/eks-auth/v1"
+
+  eks_cluster_name = module.cluster.eks_cluster_name
+  node_roles       = [module.cluster.eks_node_group_role_arn]
+  sso_users        = local.sso_users
 }

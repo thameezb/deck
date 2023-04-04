@@ -1,0 +1,27 @@
+# Full values file can be found 
+# https://github.com/armory-io/spinnaker-operator/blob/v1.8.4/deploy/operator/helm/values.yaml
+
+spinnakerService:
+  enabled: true
+  apiVersion: spinnaker.armory.io/v1alpha2
+  metadata:
+    name: spinnaker
+    namespace: ${spinnaker_deployment_namespace}
+  spinnakerConfig:
+    config:
+      version: ${armorycd_version}
+      persistentStorage:
+        persistentStoreType: s3
+        s3:
+          bucket: ${spinnaker_backend_bucket_name}
+          rootFolder: front50
+    profiles:
+      deck:
+        settings-local.js: |
+          window.spinnakerSettings.feature.kustomizeEnabled = true;
+          window.spinnakerSettings.feature.artifactsRewrite = true;
+      front50: 
+        kubernetes:
+          serviceAccountName: ${front50_service_account_name}
+  validation: {}
+  kustomize: {}

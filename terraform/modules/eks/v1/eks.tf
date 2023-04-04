@@ -1,7 +1,7 @@
 resource "aws_eks_cluster" "this" {
   name     = var.name
   role_arn = aws_iam_role.k8s_master.arn
-  version  = "1.22"
+  version  = var.kubernetes_version
 
   encryption_config {
     resources = ["secrets"]
