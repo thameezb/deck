@@ -1,4 +1,18 @@
 locals {
+  github = {
+    hooks = {
+      ipv4 = [
+        "192.30.252.0/22",
+        "185.199.108.0/22",
+        "140.82.112.0/20",
+        "143.55.64.0/20"
+      ],
+      ipv6 = [
+        "2a0a:a440::/29",
+        "2606:50c0::/32"
+      ]
+    }
+  }
   yandexnets = {
     ipv4 = [
       "5.45.192.0/18",
@@ -28,6 +42,35 @@ locals {
       "2a02:6b8::/32",
       "2a0e:fd80::/29",
     ]
+  }
+}
+
+resource "aws_security_group" "allow_access_to_spinnaker" {
+  name   = "lb-allow_access_to_spinnaker"
+  vpc_id = data.aws_vpc.this.id
+
+  ingress {
+    protocol  = "TCP"
+    from_port = 8084
+    to_port   = 8084
+
+    description = "8084 access from GithubHooks"
+
+    cidr_blocks      = local.github.hooks.ipv4
+    ipv6_cidr_blocks = local.github.hooks.ipv6
+  }
+
+  egress {
+    from_port = 0
+    protocol  = "-1"
+    to_port   = 0
+
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+
+  tags = {
+    Name = "lb-allow_access_to_spinnaker"
   }
 }
 
