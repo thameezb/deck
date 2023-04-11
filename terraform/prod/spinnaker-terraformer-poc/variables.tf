@@ -8,3 +8,8 @@ variable "armorycd_version" {
   type    = string
   default = "2.28.5"
 }
+
+variable "spinnaker_irsa_assume_role_arn" {
+  type    = string
+  default = ""
+}
