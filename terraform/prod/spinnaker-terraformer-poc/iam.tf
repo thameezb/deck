@@ -70,31 +70,31 @@ data "aws_iam_policy_document" "spinnaker_deployment" {
     actions = ["sts:AssumeRole"]
     resources = [
       # dc-ch-preprod
-      "arn:aws:iam::867394682372:role/SpinnakerDeploymentPowerUserRole",
+      "arn:aws:iam::867394682372:role/SpinnakerDeploymentRole",
       # dc-ch-prod
-      "arn:aws:iam::118027436691:role/SpinnakerDeploymentPowerUserRole",
+      "arn:aws:iam::118027436691:role/SpinnakerDeploymentRole",
       # dc-mdb-preprod or common-infra-preprod-deprecated
-      "arn:aws:iam::221736954043:role/SpinnakerDeploymentPowerUserRole",
+      "arn:aws:iam::221736954043:role/SpinnakerDeploymentRole",
       # dc-mdb-preprod-ng
-      "arn:aws:iam::785415555008:role/SpinnakerDeploymentPowerUserRole",
+      "arn:aws:iam::785415555008:role/SpinnakerDeploymentRole",
       # dc-mdb-prod
-      "arn:aws:iam::883433064081:role/SpinnakerDeploymentPowerUserRole",
+      "arn:aws:iam::883433064081:role/SpinnakerDeploymentRole",
       # dc-ui-bi-preprod
-      "arn:aws:iam::177770737270:role/SpinnakerDeploymentPowerUserRole",
+      "arn:aws:iam::177770737270:role/SpinnakerDeploymentRole",
       # yadc-ydb-preprod
-      "arn:aws:iam::690619578286:role/SpinnakerDeploymentPowerUserRole",
+      "arn:aws:iam::690619578286:role/SpinnakerDeploymentRole",
       # yadc-ydb
-      "arn:aws:iam::511453442829:role/SpinnakerDeploymentPowerUserRole",
+      "arn:aws:iam::511453442829:role/SpinnakerDeploymentRole",
       # dc-infraplane-preprod
-      "arn:aws:iam::260947003881:role/SpinnakerDeploymentPowerUserRole",
+      "arn:aws:iam::260947003881:role/SpinnakerDeploymentRole",
       # dc-infraplane-prod
-      "arn:aws:iam::737497888847:role/SpinnakerDeploymentPowerUserRole",
+      "arn:aws:iam::737497888847:role/SpinnakerDeploymentRole",
       # yadc-spinnaker
-      "arn:aws:iam::022615369514:role/SpinnakerDeploymentPowerUserRole",
+      "arn:aws:iam::022615369514:role/SpinnakerDeploymentRole",
       # yadc-sre
-      "arn:aws:iam::461644856699:role/SpinnakerDeploymentPowerUserRole",
+      "arn:aws:iam::461644856699:role/SpinnakerDeploymentRole",
       # dc-common-infra-prod
-      "arn:aws:iam::710586422240:role/SpinnakerDeploymentPowerUserRole"
+      "arn:aws:iam::710586422240:role/SpinnakerDeploymentRole"
     ]
   }
 }
@@ -107,7 +107,7 @@ resource "aws_iam_policy" "spinnaker_deployment" {
 
 resource "aws_iam_role" "spinnaker_deployment" {
   name               = "SpinnakerAssumableDeploymentRole"
-  description        = "Allows Spinnaker Terraformer to assume PowerUser roles in other accounts"
+  description        = "Allows Spinnaker Terraformer to assume roles in other accounts"
   assume_role_policy = data.aws_iam_policy_document.spinnaker_deployment_assume_policy.json
 }
 
@@ -127,13 +127,13 @@ data "aws_iam_policy_document" "external_spinnaker_deployment_assume_role" {
   }
 }
 
-resource "aws_iam_role" "external_spinnaker_deployment_poweruser" {
-  name               = "SpinnakerDeploymentPowerUserRole"
-  description        = "PowerUser Role for Spinnaker Deployment"
+resource "aws_iam_role" "external_spinnaker_deployment" {
+  name               = "SpinnakerDeploymentRole"
+  description        = "Role for Spinnaker Deployment"
   assume_role_policy = data.aws_iam_policy_document.external_spinnaker_deployment_assume_role.json
 }
 
 resource "aws_iam_role_policy_attachment" "external_spinnaker_deployment" {
-  role       = aws_iam_role.external_spinnaker_deployment_poweruser.name
-  policy_arn = "arn:aws:iam::aws:policy/PowerUserAccess"
+  role       = aws_iam_role.external_spinnaker_deployment.name
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
 }
