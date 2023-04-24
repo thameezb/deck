@@ -60,7 +60,7 @@ data "aws_iam_policy_document" "spinnaker_assumable_multiaccount_deployment" {
   }
   statement {
     effect  = "Allow"
-    actions = ["sts:AssumeRole"]
+    actions = ["sts:AssumeRoleWithWebIdentity"]
     resources = [
       # dc-ch-preprod
       "arn:aws:iam::867394682372:role/SpinnakerDeploymentRole",
@@ -87,7 +87,7 @@ data "aws_iam_policy_document" "spinnaker_assumable_multiaccount_deployment" {
       # yadc-sre
       "arn:aws:iam::461644856699:role/SpinnakerDeploymentRole",
       # dc-common-infra-prod
-      "arn:aws:iam::710586422240:role/SpinnakerDeploymentRole"
+      "arn:aws:iam::710586422240:role/SpinnakerDeploymentRole",
     ]
   }
 }
