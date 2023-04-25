@@ -60,7 +60,7 @@ data "aws_iam_policy_document" "spinnaker_assumable_multiaccount_deployment" {
   }
   statement {
     effect  = "Allow"
-    actions = ["sts:AssumeRoleWithWebIdentity"]
+    actions = ["sts:AssumeRole"]
     resources = [
       # dc-ch-preprod
       "arn:aws:iam::867394682372:role/SpinnakerDeploymentRole",
